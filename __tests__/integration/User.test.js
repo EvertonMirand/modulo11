@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import app from '../../src/app';
 
 import truncate from '../util/truncate';
-import User from '../../src/app/models/User';
 
 import factory from '../factories';
 
