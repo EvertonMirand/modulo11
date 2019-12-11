@@ -6,19 +6,19 @@ import app from '../../src/app';
 import truncate from '../util/truncate';
 import User from '../../src/app/models/User';
 
-const requestMock = {
-  name: 'Everton Miranda',
-  email: 'everton.mirandav@gmail.com',
-  password: '123456',
-};
+import factory from '../factories';
 
 describe('User', () => {
+  let requestMock = {};
   beforeEach(async () => {
     await truncate();
+    requestMock = await factory.attrs('User');
   });
 
   it('should encrypt user password when new user created', async () => {
-    const user = await User.create(requestMock);
+    const user = await factory.create('User', {
+      password: '123456',
+    });
 
     const compareHash = await bcrypt.compare('123456', user.password_hash);
     expect(compareHash).toBe(true);
